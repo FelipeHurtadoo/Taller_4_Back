@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/productos")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 public class ProductoController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class ProductoController {
      * GET /api/productos
      * @return Lista de todos los productos
      */
-    @GetMapping
+    @GetMapping // http://localhost:8080/api/productos
     public ResponseEntity<List<Producto>> getAllProductos() {
         List<Producto> productos = productoService.findAll();
         return ResponseEntity.ok(productos);
@@ -35,7 +35,7 @@ public class ProductoController {
      * @param id ID del producto
      * @return Producto encontrado o 404 si no existe
      */
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // http://localhost:8080/api/productos/1
     public ResponseEntity<Producto> getProductoById(@PathVariable Long id) {
         Optional<Producto> producto = productoService.findById(id);
         if (producto.isPresent()) {
